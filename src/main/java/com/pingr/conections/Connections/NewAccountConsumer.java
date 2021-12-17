@@ -1,5 +1,6 @@
 package com.pingr.conections.Connections;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,8 @@ public class NewAccountConsumer {
             groupId = "connection_new_accounts"
     )
     public void consume(String message) throws IOException {
-        System.out.println(message);
+        ObjectMapper mapper = new ObjectMapper();
+        Account account = mapper.readValue(message, Account.class);
+        System.out.println(account);
     }
 }
