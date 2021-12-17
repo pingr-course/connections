@@ -13,9 +13,7 @@ public class NewAccountConsumer {
             topics = "${topic.accounts}",
             groupId = "connection_new_accounts"
     )
-    public void consume(String message) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        Account account = mapper.readValue(message, Account.class);
+    public void consume(Account account) throws IOException {
         System.out.println(account);
     }
 }

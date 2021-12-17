@@ -2,6 +2,7 @@ package com.pingr.conections.Connections;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@JsonSerialize
 public class Account {
     @Id
-    @JsonProperty("id")
     private Long id;
 
     @Column(
@@ -20,7 +21,6 @@ public class Account {
             nullable = false,
             unique = true
     )
-    @JsonProperty("username")
     private String username;
 
     @OneToMany
