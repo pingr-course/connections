@@ -34,10 +34,13 @@ public class KafkaConfig {
 
     @Bean
     public ConsumerFactory<String, Account> consumerFactory() {
+        org.springframework.kafka.support.serializer.JsonDeserializer<Account> deserializer = new org.springframework.kafka.support.serializer.JsonDeserializer<>(Account.class);
+        deserializer.addTrustedPackages("*");
+        deserializer.setUseTypeMapperForKey(true);
         return new DefaultKafkaConsumerFactory<>(
                 consumerConfig(),
                 new StringDeserializer(),
-                new org.springframework.kafka.support.serializer.JsonDeserializer<>(Account.class)
+                deserializer
         );
     }
 

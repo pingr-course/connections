@@ -1,16 +1,17 @@
 spring:
   kafka:
-    producer:
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      bootstrap-servers: localhost:9092
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       bootstrap-servers: localhost:9092
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.pingr.accounts.Account.Account"
   datasource:
     username: root
-    url: jdbc:postgresql://localhost:5432/accounts
+    url: jdbc:postgresql://localhost:5433/accounts
     password: secret
   jpa:
     properties:
@@ -25,5 +26,6 @@ topic:
   accounts: new_accounts_topic
 
 server:
+  port: 8081
   error:
     include-message: always
